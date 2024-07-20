@@ -1,0 +1,78 @@
+{{> header}}
+<h2>Study Materials</h2>
+<div class="materials-container" role="main">
+    <ul class="materials-list">
+        {{#each materials}}
+            <li class="material-item">
+                <a href="/materials/{{this._id}}" class="material-link">{{this.title}}</a>
+            </li>
+        {{/each}}
+    </ul>
+</div>
+
+<style>
+    /* General Styles */
+    .materials-container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .materials-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .material-item {
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+    }
+
+    .material-item:last-child {
+        border-bottom: none;
+    }
+
+    .material-link {
+        text-decoration: none;
+        color: #007BFF;
+        font-weight: bold;
+        transition: color 0.3s, text-decoration 0.3s; /* Smooth transition */
+    }
+
+    .material-link:hover {
+        text-decoration: underline;
+        color: #0056b3; /* Darker shade of blue */
+    }
+
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+        .materials-container {
+            padding: 15px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .materials-container {
+            padding: 10px;
+        }
+
+        .material-item {
+            padding: 8px 0;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .materials-container {
+            padding: 15px;
+        }
+    }
+</style>
