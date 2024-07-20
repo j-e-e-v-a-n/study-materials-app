@@ -2,11 +2,21 @@ const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated, ensureAdmin } = require('../middleware/auth');
 const Material = require('../models/Material');
+const User = require('../models/User');
 const upload = require('../middleware/multer');
 const fs = require('fs');
 const path = require('path');
 
 // GET /admin/manageMaterials
+router.get('/admin', ensureAuthenticated, ensureAdmin, async (req, res) => {
+    try {
+        const materials = await User.find().lean();
+        res.render('admin/admin', { materials });
+    } catch (err) {
+        console.error(err);
+        res.render('error/500');
+    }
+});
 router.get('/manageMaterials', ensureAuthenticated, ensureAdmin, async (req, res) => {
     try {
         const materials = await Material.find().lean();
