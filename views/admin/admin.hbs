@@ -1,11 +1,23 @@
-{{> header}}
+{{> adminheader}}
 <h2>Study Materials</h2>
 <div class="materials-container" role="main">
     <ul class="materials-list">
         {{#each materials}}
             <li class="material-item">
-                <a href="/materials/{{this._id}}" class="material-link">{{this.username}}</a>
-                <a href="/materials/{{this._id}}" class="material-link">{{this.email}}</a>
+                <div class="material-info">
+                   
+                    <span class="material-username">{{this.username}}</span>
+                    <span class="material-email">{{this.email}}</span>
+                    
+                        <span class="material-role">Admin</span>
+                    
+                </div>
+                 {{#if this.isAdmin}}
+                    <form action="/admin/deleteUser/{{this._id}}" method="get" class="delete-form">
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
+                    {{/if}}
+                
             </li>
         {{/each}}
     </ul>
@@ -36,22 +48,45 @@
     .material-item {
         border-bottom: 1px solid #ddd;
         padding: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .material-item:last-child {
         border-bottom: none;
     }
 
-    .material-link {
-        text-decoration: none;
-        color: #007BFF;
-        font-weight: bold;
-        transition: color 0.3s, text-decoration 0.3s; /* Smooth transition */
+    .material-info {
+        display: flex;
+        flex-direction: column;
     }
 
-    .material-link:hover {
-        text-decoration: underline;
-        color: #0056b3; /* Darker shade of blue */
+    .material-username,
+    .material-email,
+    .material-role {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .material-role {
+        font-weight: bold;
+        color: #d9534f; /* Red color for Admin */
+    }
+
+    .delete-button {
+        background-color: #d9534f; /* Red color for delete button */
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s;
+    }
+
+    .delete-button:hover {
+        background-color: #c9302c; /* Darker red on hover */
     }
 
     /* Responsive Styling */
@@ -68,6 +103,12 @@
 
         .material-item {
             padding: 8px 0;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .delete-button {
+            margin-top: 10px;
         }
     }
 

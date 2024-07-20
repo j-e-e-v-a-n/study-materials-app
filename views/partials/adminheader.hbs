@@ -1,0 +1,122 @@
+<header>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="nav-brand">MyApp</a>
+            <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+            <ul class="nav-list">
+                <li><a href="/" class="nav-link">Home</a></li>
+                {{#if user}}
+                    {{#if user.isAdmin}}
+                        <li><a href="/admin/manageMaterials" class="nav-link">Admin</a></li>
+                    {{/if}}
+                    
+                {{else}}
+                    <li><a href="/admin/manageMaterials" class="nav-link">Manage Materials</a></li>
+                    <li><a href="/admin/addMaterial" class="nav-link">Add Material</a></li>
+                {{/if}}
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<style>
+    header {
+        background-color: #fff;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nav-brand {
+        font-size: 24px;
+        font-weight: bold;
+        color: #007BFF;
+        text-decoration: none;
+    }
+
+    .nav-toggle {
+        display: none;
+        font-size: 24px;
+        border: none;
+        background: none;
+        color: #007BFF;
+        cursor: pointer;
+    }
+
+    .nav-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+    }
+
+    .nav-list li {
+        margin-left: 20px;
+    }
+
+    .nav-link {
+        color: #333;
+        text-decoration: none;
+        font-weight: normal;
+    }
+
+    .nav-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Mobile styling */
+    @media (max-width: 600px) {
+        .nav-list {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 200px;
+        }
+
+        .nav-list.active {
+            display: flex;
+        }
+
+        .nav-list li {
+            margin: 0;
+        }
+
+        .nav-list li a {
+            padding: 10px 20px;
+            display: block;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .nav-list li a:last-child {
+            border-bottom: none;
+        }
+
+        .nav-toggle {
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const navToggle = document.querySelector('.nav-toggle');
+        const navList = document.querySelector('.nav-list');
+
+        navToggle.addEventListener('click', function() {
+            navList.classList.toggle('active');
+        });
+    });
+</script>
