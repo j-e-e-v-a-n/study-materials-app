@@ -4,25 +4,31 @@
             <a href="/" class="nav-brand">MyApp</a>
             <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
             <ul class="nav-list">
-                <li><a href="/" class="nav-link">Home</a></li>
-                {{#if user}}
-                    {{#if user.isAdmin}}
-                        <li><a href="/admin/manageMaterials" class="nav-link">Admin</a></li>
-                    {{/if}}
-                    
-                {{else}}
-                    <li><a href="/admin/manageMaterials" class="nav-link">Manage Materials</a></li>
-                    <li><a href="/admin/addMaterial" class="nav-link">Add Material</a></li>
-                {{/if}}
+                <li><a href="/admin/manageSubjects" class="nav-link">Manage Subjects</a></li>
+                <li><a href="/admin/manageUnits" class="nav-link">Manage Units</a></li>
+                <li><a href="/admin/manageChapters" class="nav-link">Manage Chapters</a></li>
+                <li><a href="/admin/manageMaterials" class="nav-link">Manage Materials</a></li>
             </ul>
         </div>
     </nav>
 </header>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const navToggle = document.querySelector('.nav-toggle');
+        const navList = document.querySelector('.nav-list');
+
+        navToggle.addEventListener('click', function() {
+            navList.classList.toggle('active');
+        });
+    });
+</script>
+
 <style>
     header {
         background-color: #fff;
         border-bottom: 1px solid #ddd;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     }
 
     .nav-container {
@@ -65,10 +71,12 @@
         color: #333;
         text-decoration: none;
         font-weight: normal;
+        transition: color 0.3s; /* Smooth color transition */
     }
 
     .nav-link:hover {
         text-decoration: underline;
+        color: #0056b3; /* Darker shade for hover */
     }
 
     /* Mobile styling */
@@ -83,6 +91,7 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             width: 200px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
         }
 
         .nav-list.active {
@@ -98,6 +107,7 @@
             display: block;
             color: #333;
             border-bottom: 1px solid #ddd;
+            text-align: center; /* Center align text for better appearance */
         }
 
         .nav-list li a:last-child {
@@ -109,14 +119,3 @@
         }
     }
 </style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const navToggle = document.querySelector('.nav-toggle');
-        const navList = document.querySelector('.nav-list');
-
-        navToggle.addEventListener('click', function() {
-            navList.classList.toggle('active');
-        });
-    });
-</script>

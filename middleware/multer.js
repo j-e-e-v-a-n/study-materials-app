@@ -1,27 +1,37 @@
 const multer = require('multer');
 const path = require('path');
-const { v4: uuidv4 } = require('uuid');
 
+// Set storage engine
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/');
-    },
-    filename: (req, file, cb) => {
-        cb(null, uuidv4() + path.extname(file.originalname));
+    destination: './public/uploads/',
+    filename: function(req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)); // Include file extension
     }
 });
 
-const fileFilter = (req, file, cb) => {
-    if (file.mimetype === 'application/pdf') {
-        cb(null, true);
-    } else {
-        cb(new Error('File type not supported'), false);
-    }
-};
-
+// Init upload
 const upload = multer({
     storage: storage,
-    fileFilter: fileFilter
+    limits: { fileSize: 10000000 }, // Limit files to 10MB
+    fileFilter: function(req, file, cb) {
+        checkFileType(file, cb);
+    }
 });
 
-module.exports = upload;
+// Check file type
+function checkFileType(file, cb) {
+    // Allowed ext
+    const filetypes = /jpeg|jpg|png|pdf|doc|docx/;
+    // Check ext
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    // Check mime
+    const mimetype = filetypes.test(file.mimetype);
+
+    if (mimetype && extname) {
+        return cb(null, true);
+    } else {
+        cb('Error: Files of this type are not supported!');
+    }
+}
+
+module.exports = upload;

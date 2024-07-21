@@ -1,0 +1,125 @@
+<style>
+    /* Global Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f7f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Container Styling */
+    .container {
+        max-width: 600px;
+        margin: 40px auto; /* Center container horizontally */
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        text-align: center; /* Center text and form elements */
+    }
+
+    /* Header */
+    h2 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    /* Form Groups */
+    .form-group {
+        margin-bottom: 1.5rem;
+        text-align: left; /* Align labels and inputs to the left */
+    }
+
+    /* Labels */
+    label {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #555;
+        display: block; /* Ensure labels are block elements for better spacing */
+        margin-bottom: 0.5rem;
+    }
+
+    /* Input Fields */
+    input[type="text"] {
+        border: 1px solid #ced4da;
+        border-radius: 0.375rem;
+        box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+        padding: 0.75rem 1.25rem;
+        font-size: 1rem;
+        width: 100%; /* Full width of the form group */
+        box-sizing: border-box;
+    }
+
+    /* Button Styling */
+    .btn {
+        background-color: #007bff;
+        border: none;
+        color: #fff;
+        padding: 0.75rem 1.5rem; /* Increased padding for a more prominent button */
+        font-size: 1rem;
+        font-weight: 500;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        text-decoration: none; /* Remove underline for button-like appearance */
+        display: inline-block; /* Ensure button is inline with form elements */
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px); /* Slight lift on hover */
+    }
+
+    .btn:active {
+        background-color: #004085;
+        transform: translateY(0); /* Reset lift on click */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .container {
+            padding: 15px;
+        }
+
+        input[type="text"] {
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            margin: 20px;
+            padding: 10px;
+        }
+
+        input[type="text"] {
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+    }
+</style>
+{{> adminheader}}
+
+<div class="container">
+    <h2>Add New Subject</h2>
+    <form action="/admin/addSubject" method="POST">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <button type="submit" class="btn">Add Subject</button>
+    </form>
+</div>

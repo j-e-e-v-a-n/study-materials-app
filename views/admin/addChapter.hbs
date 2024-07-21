@@ -1,0 +1,125 @@
+{{> adminheader}}
+
+<div class="container">
+    <h2>Add Chapter</h2>
+    <form action="/admin/addChapter" method="post">
+        <div class="form-group">
+            <label for="title" class="form-label">Chapter Title:</label>
+            <input type="text" id="title" name="title" class="form-control" placeholder="Enter chapter title" required>
+        </div>
+        <div class="form-group">
+            <label for="unit" class="form-label">Unit:</label>
+            <select id="unit" name="unitId" class="form-select" required>
+                {{#each units}}
+                    <option value="{{this._id}}">
+                        {{this.title}} - {{this.subjectTitle}}
+                    </option>
+                {{/each}}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Chapter</button>
+    </form>
+</div>
+
+
+<style>
+    /* Global Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f7f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Container Styling */
+    .container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* Form Header */
+    h2 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Form Groups */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Labels */
+    .form-label {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #666;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    /* Input and Select Fields */
+    .form-control, .form-select {
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        padding: 0.75rem 1.25rem;
+        font-size: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Button Styling */
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        color: #fff;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+    }
+
+    .btn-primary:active {
+        background-color: #004085;
+        transform: translateY(0);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .container {
+            padding: 15px;
+        }
+
+        .form-control, .form-select {
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+        }
+
+        .btn-primary {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            max-width: 100%;
+            margin: 20px;
+        }
+    }
+</style>

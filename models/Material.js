@@ -11,10 +11,10 @@ const MaterialSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    pdfPath: {
+    files: [{
         type: String,
-        required: true
-    },
+        required: true // Array of filenames
+    }],
     date: {
         type: Date,
         default: Date.now

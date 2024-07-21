@@ -1,31 +1,33 @@
 {{> adminheader}}
-<h2>Study Materials</h2>
-<div class="materials-container" role="main">
+<div class="materials-container">
+    <h2>Study Materials</h2>
     <ul class="materials-list">
         {{#each materials}}
             <li class="material-item">
                 <div class="material-info">
-                   
                     <span class="material-username">{{this.username}}</span>
                     <span class="material-email">{{this.email}}</span>
-                     {{#if this.isAdmin}}
+                    {{#if this.isAdmin}}
                         <span class="material-role">Admin</span>
-                     {{/if}}
+                    {{/if}}
                 </div>
-                
+                <form action="/admin/deleteUser/{{this._id}}" method="post" class="delete-form">
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
             </li>
         {{/each}}
     </ul>
 </div>
+
 <style>
     /* General Styles */
     .materials-container {
         max-width: 800px;
         margin: 20px auto;
         padding: 20px;
-        background-color: #fff;
+        background-color: #ffffff;
         border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     h2 {
@@ -35,16 +37,21 @@
     }
 
     .materials-list {
-        list-style-type: none;
+        list-style: none;
         padding: 0;
     }
 
     .material-item {
         border-bottom: 1px solid #ddd;
-        padding: 10px 0;
+        padding: 15px 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        transition: background-color 0.3s ease;
+    }
+
+    .material-item:hover {
+        background-color: #f1f1f1;
     }
 
     .material-item:last-child {
@@ -54,6 +61,7 @@
     .material-info {
         display: flex;
         flex-direction: column;
+        color: #333;
     }
 
     .material-username,
@@ -76,11 +84,12 @@
         border-radius: 4px;
         cursor: pointer;
         font-size: 14px;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s, transform 0.2s;
     }
 
     .delete-button:hover {
-        background-color: #c9302c; /* Darker red on hover */
+        background-color: #c82333; /* Darker red on hover */
+        transform: scale(1.05); /* Slight zoom effect */
     }
 
     /* Responsive Styling */
@@ -96,19 +105,15 @@
         }
 
         .material-item {
-            padding: 8px 0;
+            padding: 10px 0;
             flex-direction: column;
             align-items: flex-start;
         }
 
         .delete-button {
             margin-top: 10px;
-        }
-    }
-
-    @media (max-width: 400px) {
-        .materials-container {
-            padding: 15px;
+            width: 100%; /* Full width on small screens */
+            text-align: center;
         }
     }
 </style>

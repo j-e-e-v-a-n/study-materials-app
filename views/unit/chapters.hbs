@@ -1,0 +1,59 @@
+{{> header}}
+<div><h2>{{unit.title}}</h2> <h2>Notes</h2></div>
+
+
+<div class="chapters-container">
+    <ul class="chapters-list">
+        {{#each unit.chapters}}
+            <li class="chapter-item">
+                <a href="/chapters/{{this._id}}" class="chapter-link">
+                    {{this.title}}
+                </a>
+            </li>
+        {{/each}}
+    </ul>
+</div>
+
+<style>
+    .chapters-container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .chapters-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .chapter-item {
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+    }
+
+    .chapter-item:last-child {
+        border-bottom: none;
+    }
+
+    .chapter-link {
+        color: #007BFF;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s, text-decoration 0.3s;
+    }
+
+    .chapter-link:hover {
+        text-decoration: underline;
+        color: #0056b3;
+    }
+</style>
